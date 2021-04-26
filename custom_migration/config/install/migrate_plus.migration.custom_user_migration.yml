@@ -1,0 +1,26 @@
+id: custom_user_xml_migration
+label: Migrate users from the xml source.
+migration_group: custom_migration
+source:
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: xml
+  urls: ['modules/custom/custom_migration/migration_xmls/users.xml']
+  item_selector: /users/user
+  fields:
+    - name: id
+      selector: id
+    - name: name
+      selector: name
+    - name: email
+      selector: email
+  ids:
+    id:
+      type: integer
+process:
+  uid: id
+  name: name
+  mail: email
+destination:
+  plugin: entity:user
+migration_dependencies: {}

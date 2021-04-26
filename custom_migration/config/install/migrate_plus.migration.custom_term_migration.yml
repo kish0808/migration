@@ -1,0 +1,24 @@
+id: custom_term_migration
+label: Migrate article categories from the source xml to taxonomy terms
+migration_group: custom_migration
+source:
+  plugin: url
+  data_fetcher_plugin: file
+  data_parser_plugin: xml
+  urls: ['modules/custom/custom_migration/migration_xmls/categories.xml']
+  item_selector: /categories/category
+  fields:
+    - name: id
+      selector: id
+    - name: name
+      selector: name
+  ids:
+    id:
+      type: integer
+process:
+  tid: id
+  name: name
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: article
+migration_dependencies: {}
